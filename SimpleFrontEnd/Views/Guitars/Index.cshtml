@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Guitar>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2>Guitars</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Shape</th>
+            <th>Strings</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var guitar in Model)
+        {
+            <tr>
+                <td>@guitar.Id</td>
+                <td>@guitar.Make</td>
+                <td>@guitar.Model</td>
+                <td>@guitar.Shape</td>
+                <td>@guitar.Strings</td>
+                <td>
+                    <a href="/Guitars/Details/@guitar.Id">Details</a> |
+                    <a href="/Guitars/Edit/@guitar.Id">Edit</a> |
+                    <a href="/Guitars/Delete/@guitar.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Guitars/Create" class="btn btn-primary">Create New</a>

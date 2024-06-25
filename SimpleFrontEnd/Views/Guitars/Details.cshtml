@@ -1,0 +1,49 @@
+﻿@model Guitar
+
+@{
+    ViewData["Title"] = "Guitar Details";
+}
+
+<h2>Guitar Details</h2>
+
+<div>
+    <h4>Guitar</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Id
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Id
+        </dd>
+        <dt class="col-sm-2">
+            Make
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Make
+        </dd>
+        <dt class="col-sm-2">
+            Model
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Model
+        </dd>
+        <dt class="col-sm-2">
+            Shape
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Shape
+        </dd>
+        <dt class="col-sm-2">
+            Strings
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Strings
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a href="/Guitars/Edit/@Model.Id" class="btn btn-primary">Edit</a> |
+    <a href="/Guitars" class="btn btn-secondary">Back to List</a>
+</div>
