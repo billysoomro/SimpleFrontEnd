@@ -3,7 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHttpClient("SimpleCrudApi", client =>
+builder.Services.AddHttpClient("SimpleCrudApiClient", client =>
 {
     client.BaseAddress = new Uri("https://localhost:32770");
 });
