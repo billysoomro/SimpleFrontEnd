@@ -13,17 +13,24 @@ namespace SimpleFrontEnd.HealthChecks
             _httpClient = _httpClientFactory.CreateClient("SimpleCrudApiClient");
         }
 
-        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
-        
+        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)        
         {
-            var response = await _httpClient.GetAsync("/api/Canary", cancellationToken);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return new HealthCheckResult(HealthStatus.Healthy, "Able to communicate to the SimpleCrudApi");                
+                var response = await _httpClient.GetAsync("/api/Canary", cancellationToken);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return new HealthCheckResult(HealthStatus.Healthy, "Able to communicate to the SimpleCrudApi");
+                }
+
+                return new HealthCheckResult(HealthStatus.Unhealthy, "Unable to communicate to the SimpleCrudApi");
             }
 
-            return new HealthCheckResult(HealthStatus.Unhealthy, "Unable to communicate to the SimpleCrudApi");
+            catch (Exception ex) 
+            {
+                return new HealthCheckResult(HealthStatus.Unhealthy, "Unable to communicate to the SimpleCrudApi.", ex);
+            }
         }
     }
 }

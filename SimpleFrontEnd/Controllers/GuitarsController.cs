@@ -20,63 +20,95 @@ namespace SimpleFrontEnd.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var response = await _httpClient.GetAsync("/api/Guitars");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var guitars = JsonSerializer.Deserialize<List<Guitar>>(content);
+                var response = await _httpClient.GetAsync("/api/Guitars");
 
-                return View(guitars);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var guitars = JsonSerializer.Deserialize<List<Guitar>>(content);
+
+                    return View(guitars);
+                }
+
+                return Content("Error fetching guitars");
             }
 
-            return Content("Error fetching guitars");
+            catch (Exception ex)
+            {
+                return Content($"Error fetching guitars: {ex}");
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)               
         {
-            var response = await _httpClient.GetAsync($"/api/Guitars/{id}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var guitar = JsonSerializer.Deserialize<Guitar>(content);
+                var response = await _httpClient.GetAsync($"/api/Guitars/{id}");
 
-                return View(guitar);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var guitar = JsonSerializer.Deserialize<Guitar>(content);
+
+                    return View(guitar);
+                }
+
+                return Content("Error fetching guitar details");
             }
 
-            return Content("Error fetching guitar details");
+            catch (Exception ex)
+            {
+                return Content($"Error fetching guitar details: {ex}");
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var response = await _httpClient.GetAsync($"/api/Guitars/{id}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var guitar = JsonSerializer.Deserialize<Guitar>(content);
+                var response = await _httpClient.GetAsync($"/api/Guitars/{id}");
 
-                return View(guitar);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var guitar = JsonSerializer.Deserialize<Guitar>(content);
+
+                    return View(guitar);
+                }
+
+                return Content("Error fetching guitar details");
             }
 
-            return Content("Error fetching guitar details");
+            catch (Exception ex)
+            {
+                return Content($"Error fetching guitar details: {ex}");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(Guitar guitar)
         {
-            var content = new StringContent(JsonSerializer.Serialize(guitar), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync("/api/Guitars", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return RedirectToAction(nameof(Index));
+                var content = new StringContent(JsonSerializer.Serialize(guitar), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PutAsync("/api/Guitars", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return Content("Error updating guitar");
             }
 
-            return Content("Error updating guitar");
+            catch (Exception ex)
+            {
+                return Content($"Error updating guitar: {ex}");
+            }
         }
 
         [HttpGet]
@@ -88,44 +120,68 @@ namespace SimpleFrontEnd.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Guitar guitar)
         {
-            var content = new StringContent(JsonSerializer.Serialize(guitar), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("/api/Guitars", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return RedirectToAction(nameof(Index));
+                var content = new StringContent(JsonSerializer.Serialize(guitar), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("/api/Guitars", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return Content("Error creating guitar");
             }
 
-            return Content("Error creating guitar");
+            catch (Exception ex)
+            {
+                return Content($"Error creating guitar: {ex}");
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _httpClient.GetAsync($"/api/Guitars/{id}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var guitar = JsonSerializer.Deserialize<Guitar>(content);
+                var response = await _httpClient.GetAsync($"/api/Guitars/{id}");
 
-                return View(guitar);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var guitar = JsonSerializer.Deserialize<Guitar>(content);
+
+                    return View(guitar);
+                }
+
+                return Content("Error fetching guitar details");
             }
 
-            return Content("Error fetching guitar details");
+            catch (Exception ex)
+            {
+                return Content($"Error fetching guitar: {ex}");
+            }
         }
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var response = await _httpClient.DeleteAsync($"/api/Guitars/{id}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return RedirectToAction(nameof(Index));
+                var response = await _httpClient.DeleteAsync($"/api/Guitars/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return Content("Error deleting guitar");
             }
 
-            return Content("Error deleting guitar");
+            catch (Exception ex)
+            {
+                return Content($"Error deleting guitar: {ex}");
+            }
         }
 
         [HttpGet]
