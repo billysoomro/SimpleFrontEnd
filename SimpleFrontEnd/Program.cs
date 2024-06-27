@@ -1,3 +1,5 @@
+using SimpleFrontEnd.HealthChecks;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,8 +7,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient("SimpleCrudApiClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:32770");
+    client.BaseAddress = new Uri("https://localhost:7166");
 });
+
+builder.Services.AddHealthChecks().AddCheck<SimpleCrudApiHealthCheck>("SimpleCrudApiHealthCheck>");
 
 var app = builder.Build();
 
@@ -28,5 +32,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Guitars}/{action=Index}/{id?}");
+
+app.MapHealthChecks("/health");
 
 app.Run();
