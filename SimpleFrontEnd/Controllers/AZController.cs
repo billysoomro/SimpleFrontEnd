@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SimpleFrontEnd.Utlilities;
+using SimpleFrontEnd.Utilities;
 
 namespace SimpleCrudApi.Controllers
 {
@@ -12,6 +12,11 @@ namespace SimpleCrudApi.Controllers
         {
             try
             {
+                if (EnvironmentChecker.IsRunningInLambda())
+                {
+                    return Ok("This functionality isn't available while running in Lambda.");
+                }
+
                 var availabilityZone = await InstanceMetadataRetriever.GetAvailabilityZoneAsync();
 
                 return Ok(availabilityZone);

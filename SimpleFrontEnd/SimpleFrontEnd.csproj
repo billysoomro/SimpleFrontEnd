@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -6,10 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>12678406-9046-4b28-b605-1fc4563fc37f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<AWSProjectType>Lambda</AWSProjectType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+	<PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

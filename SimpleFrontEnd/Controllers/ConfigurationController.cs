@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SimpleFrontEnd.Utilities;
 
 namespace SimpleFrontEnd.Controllers
 {
@@ -6,27 +7,17 @@ namespace SimpleFrontEnd.Controllers
     [Route("api/[controller]")]
     public class ConfigurationController : ControllerBase
     {
-        private readonly HttpClient _httpClient;
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        public ConfigurationController(IHttpClientFactory httpClientFactory)
-        {
-            _httpClientFactory = httpClientFactory;
-            _httpClient = _httpClientFactory.CreateClient("SimpleCrudApiClient");
-        }
-
         [HttpGet("{durationInMinutes}")]
-        public async Task<IActionResult> Get(int durationInMinutes)
-        
+        public IActionResult SimulateCpuUsageByCores(int durationInMinutes)
         {
-            var response = await _httpClient.GetAsync($"/api/Configuration/{durationInMinutes}");
-
-            if (response.IsSuccessStatusCode)
+            if (EnvironmentChecker.IsRunningInLambda())
             {
-                return Ok($"CPU stress test for {durationInMinutes} minute(s) complete.");
+                return Ok("This functionality isn't available while running in Lambda.");
             }
 
-            return BadRequest();            
+            CpuStressSimulator.SimulateCpuUsageByCores(durationInMinutes);
+
+            return Ok($"CPU stress test for {durationInMinutes} minute(s) complete.");
         }
     }
 }

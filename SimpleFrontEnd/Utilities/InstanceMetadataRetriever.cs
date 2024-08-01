@@ -1,4 +1,4 @@
-﻿namespace SimpleFrontEnd.Utlilities
+﻿namespace SimpleFrontEnd.Utilities
 {
     public static class InstanceMetadataRetriever
     {
