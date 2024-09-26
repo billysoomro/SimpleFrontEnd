@@ -18,7 +18,7 @@ namespace SimpleFrontEnd
 
             services.AddHttpClient("SimpleCrudApiClient", client =>
             {
-                client.BaseAddress = new Uri("3.9.171.122");
+                client.BaseAddress = new Uri("http://3.9.171.122:8080");
             });
 
             services.AddHealthChecks().AddCheck<SimpleCrudApiHealthCheck>("SimpleCrudApiHealthCheck>");
