@@ -18,7 +18,7 @@ namespace SimpleFrontEnd
 
             services.AddHttpClient("SimpleCrudApiClient", client =>
             {
-                client.BaseAddress = new Uri("http://simplecrudapi-container-8080-tcp.guitarcatalog:8080");
+                client.BaseAddress = new Uri("3.9.171.122");
             });
 
             services.AddHealthChecks().AddCheck<SimpleCrudApiHealthCheck>("SimpleCrudApiHealthCheck>");
