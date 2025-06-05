@@ -7,7 +7,7 @@
     "function-name" : "SimpleFrontEnd",
     "function-description" : "SimpleFrontEnd running on aws lambda",
     "package-type"         : "Zip",
-    "function-handler"     : "SimpleFrontEnd::SimpleFrontEnd.LambdaEntryPoint::FunctionHandlerAsync",
+    "function-handler"     : "SimpleFrontEnd",
     "function-memory-size" : 256,
     "function-role"        : "arn:aws:iam::637423394203:role/lambda_exec_SimpleFrontEnd",
     "function-timeout"     : 10,
